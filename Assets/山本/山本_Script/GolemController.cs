@@ -3,13 +3,13 @@ using UnityEngine;
 public class GolemController : EnemyBase
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    new void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
         
     }
