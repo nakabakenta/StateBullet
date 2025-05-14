@@ -20,11 +20,13 @@ public class EnemyBase : MonoBehaviour
     public float corrFre;    //腐食の間隔
     public float burnFre;    //燃焼の間隔
     public float actiFre;    //活性化の間隔
+    public bool setDuration; //間隔を設定したかどうか(何度も再設定しないように)
+
+    //状態異常の判別
     public bool isMold;      //カビ状態かどうか
     public bool isCorrosion; //腐食状態かどうか
     public bool isBurning;   //燃焼状態かどうか
     public bool isActive;    //活性化状態かどうか
-    public bool setDuration; //間隔を設定
 
     //割合値
     public float mold;       //カビ
@@ -35,7 +37,7 @@ public class EnemyBase : MonoBehaviour
     //ダメージ値　火　　水　　風　　　爆破　　　金属　　草　　通常　
     public float fire, water, wind, explosion, metal, grass, normal;
     //付与中の属性
-    public bool isFire, isWater, isWind, isExplosion, isMetal, isGrass;
+    public bool isFire, isWater, isWind, isMetal, isGrass;
 
 
     //デバッグ用
@@ -125,6 +127,7 @@ public class EnemyBase : MonoBehaviour
 
         //属性付与における相性
         {
+            //火と水は共存できず、水が優先される
             if (isWater)
                 isFire = false;
         }
@@ -139,7 +142,6 @@ public class EnemyBase : MonoBehaviour
             isFire = false;
             isWater = false;
             isWind = false;
-            isExplosion = false;
             isMetal = false;
             isGrass = false;
         }
@@ -231,37 +233,38 @@ public class EnemyBase : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Fire"))
+        //受けた弾ごとに、受けるダメージを変え、
+        //属性を付与できる場合、付与する
+        if(other.CompareTag("Fire")) //火
         {
             currentHP -= fire;
             isFire = true;
         }
-        if (other.CompareTag("Water"))
+        if (other.CompareTag("Water"))//水
         {
             currentHP -= water;
             isWater = true;
         }
-        if (other.CompareTag("Wind"))
+        if (other.CompareTag("Wind"))//風
         {
             currentHP -= wind;
             isWind = true;
         }
-        if (other.CompareTag("Explosion"))
+        if (other.CompareTag("Explosion"))//爆破
         {
             currentHP -= explosion;
-            isExplosion = true;
         }
-        if (other.CompareTag("Metal"))
+        if (other.CompareTag("Metal"))//金属
         {
             currentHP -= metal;
             isMetal = true;
         }
-        if (other.CompareTag("Grass"))
+        if (other.CompareTag("Grass"))//草
         {
             currentHP -= grass;
             isGrass = true;
         }
-        if (other.CompareTag("Normal"))
+        if (other.CompareTag("Normal"))//通常
         {
             currentHP -= normal;
         }
