@@ -8,10 +8,14 @@ public class EnemyBase : MonoBehaviour
     public float moveSpeed;     //移動速度
     public float originalSpeed; //基本移動速度
 
+    public float shotInterval;        //弾の発射間隔
+    public float shotTimer;           //発射までの計測用
+    public float bulletSpeed;         //弾速
+    public GameObject[] bulletPrefab; //弾のPrefabを入れるための変数
+    public new GameObject camera;       //カメラ
+
     public float stateCount;     //持続時間の計測用
     public float sustainability; //状態異常の持続時間
-
-    
     public bool isState; //状態異常になっているか
 
     //スリップダメージの頻度
@@ -61,6 +65,9 @@ public class EnemyBase : MonoBehaviour
         //体力の管理
         HPManager();
 
+        //攻撃の間隔
+        AttackInterval();
+
         //属性の付与及び状態異常付与の管理
         StateEnchant();
 
@@ -108,6 +115,26 @@ public class EnemyBase : MonoBehaviour
         {
             currentHP = maxHP;
         }
+    }
+
+    //攻撃の間隔
+    public void AttackInterval()
+    {
+        shotTimer += Time.deltaTime;
+
+        if(shotTimer >= shotInterval)
+        {
+            Shot();
+            shotTimer = 0;
+        }
+    }
+
+    //発射処理
+    void Shot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab[0], this.transform.position, Quaternion.identity); //弾を生成
+        Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
+        bulletRigidbody.AddForce(this.transform.forward * bulletSpeed); //キャラクターが向いている方向に弾に力を加える
     }
 
     //属性の付与及び状態異常付与の管理

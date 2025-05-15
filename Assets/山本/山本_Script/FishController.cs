@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FishController : EnemyBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    //// Start is called once before the first execution of Update after the MonoBehaviour is created
     //new void Start()
     //{
 
