@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_HP_Front
+      name: UI_HP_Base
       rect:
         serializedVersion: 2
         x: 0
@@ -105,7 +105,7 @@ TextureImporter:
         width: 1024
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -119,15 +119,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_HP_Back
+      name: UI_HP_Gage
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 128
+        x: 24
+        y: 24
+        width: 864
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -154,8 +154,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_HP_Back: -451289572
-      UI_HP_Front: -2014580754
+      UI_HP_Base: -2014580754
+      UI_HP_Gage: -451289572
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
