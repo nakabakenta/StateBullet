@@ -6,9 +6,6 @@ public class EnemyBulletBase : MonoBehaviour
     public int firstAttack;    //初期攻撃力
     public int currentAttack;  //現在の攻撃力
 
-    public float firstSpeed;    //初期弾速
-    public float currentSpeed;  //現在の弾速
-
     public string BulletMaster;     //弾の持ち主のタグ保存
 
     //プレイヤースクリプトを取得
@@ -20,7 +17,6 @@ public class EnemyBulletBase : MonoBehaviour
     {
         //初期値を設定
         currentAttack = firstAttack;  //攻撃力
-        currentSpeed = firstSpeed;    //弾速
     }
 
     // Update is called once per frame
@@ -31,14 +27,18 @@ public class EnemyBulletBase : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        //プレイヤーに当たったとき
         if (other.gameObject.tag == "Player")
         {
+            //プレイヤーのスクリプトを取得して、HPを減らす
             testPlayer = other.gameObject.GetComponent<TestPlayer>();
             testPlayer.currentHp -= currentAttack;
 
         }
+        //BulletMaster以外のオブジェクトに当たったとき
         if (other.gameObject.tag != BulletMaster)
         {
+            //自身を消去
             Destroy(gameObject);
         }
     }

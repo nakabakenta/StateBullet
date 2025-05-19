@@ -8,13 +8,7 @@ TagManager:
   - EBullet
   - IronEnemy
   - WaterEnemy
-  - PFire
-  - PWater
-  - PWind
-  - PExplosion
-  - PMetal
-  - PGrass
-  - PNormal
+  - PBullet
   layers:
   - Default
   - TransparentFX

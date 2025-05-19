@@ -15,6 +15,7 @@ public class EnemyBase : MonoBehaviour
     public float shotTimer;           //発射までの計測用
     public float bulletSpeed;         //弾速
     public GameObject[] bulletPrefab; //弾のPrefabを入れるための変数
+    public float bulletPosY;          //弾を生成するときの位置調整用
     
     //状態異常関連
     public float stateCount;     //持続時間の計測用
@@ -45,6 +46,11 @@ public class EnemyBase : MonoBehaviour
     //被ダメージ関連
     public bool isDamage;
 
+    //環境スクリプト(マージ後、置き換え)
+    public Environment environment;
+    //敵の弾のスクリプト
+    public EnemyBulletBase enemyBullet;
+
     //デバッグ用
     public bool test;
     public bool up;
@@ -60,6 +66,8 @@ public class EnemyBase : MonoBehaviour
         sustainability = 30.0f;
         //発射間隔の初回設定
         shotInterval = Random.Range(minInterval, maxInterval);
+        //環境情報を取得
+        environment=GameObject.Find("VirtualEnvironment").GetComponent<Environment>();
     }
 
     // Update is called once per frame
@@ -143,10 +151,23 @@ public class EnemyBase : MonoBehaviour
     //発射処理
     void Shot()
     {
-        GameObject bullet = Instantiate(bulletPrefab[0], this.transform.position, Quaternion.identity); //弾を生成
+        Vector3 bulletPos = this.transform.position;
+        bulletPos.y += bulletPosY;
+        GameObject bullet = Instantiate(bulletPrefab[0], bulletPos, Quaternion.identity); //弾を生成
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
         bulletRigidbody.AddForce(this.transform.forward * bulletSpeed); //キャラクターが向いている方向に弾に力を加える
-        Debug.Log("aaaaaaaaaaaa");
+    }
+
+    //環境状態による変化を管理
+    public void Environment()
+    {
+        //豪雨
+        //猛暑
+        //暴風
+        //高重力
+        //低重力
+        //豊穣
+
     }
 
     //属性の付与及び状態異常付与の管理
@@ -272,44 +293,10 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        //受けた弾ごとに、受けるダメージを変え、
-        //属性を付与できる場合、付与する
-        if(other.CompareTag("PFire")) //火
+        if(other.CompareTag("PBullet"))
         {
-            currentHP -= fire;
-            isFire = true;
+            //ダメージを受けた
+            isDamage = true;
         }
-        if (other.CompareTag("PWater"))//水
-        {
-            currentHP -= water;
-            isWater = true;
-        }
-        if (other.CompareTag("PWind"))//風
-        {
-            currentHP -= wind;
-            isWind = true;
-        }
-        if (other.CompareTag("PExplosion"))//爆破
-        {
-            currentHP -= explosion;
-        }
-        if (other.CompareTag("PMetal"))//金属
-        {
-            currentHP -= metal;
-            isMetal = true;
-        }
-        if (other.CompareTag("PGrass"))//草
-        {
-            currentHP -= grass;
-            isGrass = true;
-        }
-        if (other.CompareTag("PNormal"))//通常
-        {
-            currentHP -= normal;
-        }
-
-        //ダメージを受けた
-        isDamage = true;
-
     }
 }
