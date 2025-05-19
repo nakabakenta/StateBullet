@@ -2,22 +2,24 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    public float maxHP;     //最大HP
-    public float currentHP; //現在のHP
-
+    //基礎能力
+    public float maxHP;         //最大HP
+    public float currentHP;     //現在のHP
     public float moveSpeed;     //移動速度
     public float originalSpeed; //基本移動速度
 
+    //攻撃関連
     public float shotInterval;        //弾の発射間隔
+    public float minInterval;         //間隔の最短値
+    public float maxInterval;         //間隔の最長値
     public float shotTimer;           //発射までの計測用
     public float bulletSpeed;         //弾速
     public GameObject[] bulletPrefab; //弾のPrefabを入れるための変数
-    public new GameObject camera;       //カメラ
-
+    
+    //状態異常関連
     public float stateCount;     //持続時間の計測用
     public float sustainability; //状態異常の持続時間
-    public bool isState; //状態異常になっているか
-
+    public bool isState;         //状態異常になっているか
     //スリップダメージの頻度
     public float frequency;  //繰り返す間隔
     public float moldFre;    //カビの間隔
@@ -25,31 +27,30 @@ public class EnemyBase : MonoBehaviour
     public float burnFre;    //燃焼の間隔
     public float actiFre;    //活性化の間隔
     public bool setDuration; //間隔を設定したかどうか(何度も再設定しないように)
-
     //状態異常の判別
     public bool isMold;      //カビ状態かどうか
     public bool isCorrosion; //腐食状態かどうか
     public bool isBurning;   //燃焼状態かどうか
     public bool isActive;    //活性化状態かどうか
-
     //割合値
     public float mold;       //カビ
     public float corrosion;  //腐食
     public float burning;    //燃焼
     public float active;     //活性化
-
     //ダメージ値　火　　水　　風　　　爆破　　　金属　　草　　通常　
     public float fire, water, wind, explosion, metal, grass, normal;
     //付与中の属性
     public bool isFire, isWater, isWind, isMetal, isGrass;
 
+    //被ダメージ関連
+    public bool isDamage;
 
     //デバッグ用
     public bool test;
     public bool up;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void Start()
+    protected virtual void Start()
     {
         //現在のHPを最大値に設定
         currentHP = maxHP;
@@ -57,10 +58,12 @@ public class EnemyBase : MonoBehaviour
         originalSpeed = moveSpeed;
         //状態異常の持続時間を設定(30秒)
         sustainability = 30.0f;
+        //発射間隔の初回設定
+        shotInterval = Random.Range(minInterval, maxInterval);
     }
 
     // Update is called once per frame
-    public void Update()
+    protected virtual void Update()
     {
         //体力の管理
         HPManager();
@@ -75,28 +78,30 @@ public class EnemyBase : MonoBehaviour
         StateManager();
 
         //デバッグ用
-        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (up)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!test)
+                if (up)
                 {
-                    Time.timeScale = 0;
-                    test = true;
-                    up = false;
-                }
-                else
-                {
-                    Time.timeScale = 1;
-                    test = false;
-                    up = false;
+                    if (!test)
+                    {
+                        Time.timeScale = 0;
+                        test = true;
+                        up = false;
+                    }
+                    else
+                    {
+                        Time.timeScale = 1;
+                        test = false;
+                        up = false;
+                    }
                 }
             }
-        }
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            up = true;
-        }
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                up = true;
+            }
+        }  
     }
 
     //HPの管理
@@ -120,11 +125,17 @@ public class EnemyBase : MonoBehaviour
     //攻撃の間隔
     public void AttackInterval()
     {
+        //発射までの時間を計測
         shotTimer += Time.deltaTime;
 
+        //shotTimerとshotIntervalの値が同じになったら
         if(shotTimer >= shotInterval)
         {
+            //弾を発射
             Shot();
+            //発射間隔を再設定
+            shotInterval = Random.Range(minInterval, maxInterval);
+            //タイマーを0に戻す
             shotTimer = 0;
         }
     }
@@ -135,6 +146,7 @@ public class EnemyBase : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab[0], this.transform.position, Quaternion.identity); //弾を生成
         Rigidbody bulletRigidbody = bullet.GetComponent<Rigidbody>();
         bulletRigidbody.AddForce(this.transform.forward * bulletSpeed); //キャラクターが向いている方向に弾に力を加える
+        Debug.Log("aaaaaaaaaaaa");
     }
 
     //属性の付与及び状態異常付与の管理
@@ -258,42 +270,46 @@ public class EnemyBase : MonoBehaviour
         frequency = actiFre;
     }
 
-    public void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         //受けた弾ごとに、受けるダメージを変え、
         //属性を付与できる場合、付与する
-        if(other.CompareTag("Fire")) //火
+        if(other.CompareTag("PFire")) //火
         {
             currentHP -= fire;
             isFire = true;
         }
-        if (other.CompareTag("Water"))//水
+        if (other.CompareTag("PWater"))//水
         {
             currentHP -= water;
             isWater = true;
         }
-        if (other.CompareTag("Wind"))//風
+        if (other.CompareTag("PWind"))//風
         {
             currentHP -= wind;
             isWind = true;
         }
-        if (other.CompareTag("Explosion"))//爆破
+        if (other.CompareTag("PExplosion"))//爆破
         {
             currentHP -= explosion;
         }
-        if (other.CompareTag("Metal"))//金属
+        if (other.CompareTag("PMetal"))//金属
         {
             currentHP -= metal;
             isMetal = true;
         }
-        if (other.CompareTag("Grass"))//草
+        if (other.CompareTag("PGrass"))//草
         {
             currentHP -= grass;
             isGrass = true;
         }
-        if (other.CompareTag("Normal"))//通常
+        if (other.CompareTag("PNormal"))//通常
         {
             currentHP -= normal;
         }
+
+        //ダメージを受けた
+        isDamage = true;
+
     }
 }

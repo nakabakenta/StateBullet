@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class GolemController : EnemyBase
+public class TestPlayer : MonoBehaviour
 {
+    public int maxHp;
+    public int currentHp;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    protected override void Start()
+    void Start()
     {
-        base.Start();
+        currentHp = maxHp;
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        base.Update();
-
-        //ˆÚ“®ˆ—
-
+        
     }
 }

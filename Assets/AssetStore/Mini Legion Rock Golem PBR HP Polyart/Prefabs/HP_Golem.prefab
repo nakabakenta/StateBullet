@@ -297,6 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4168634819871070}
   - component: {fileID: 95247164175502188}
+  - component: {fileID: 5796715877518151435}
   m_Layer: 0
   m_Name: HP_Golem
   m_TagString: Untagged
@@ -343,6 +344,59 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5796715877518151435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438169871030806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d779eb419955e46bbc0329686d7f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 1750
+  currentHP: 0
+  moveSpeed: 0
+  originalSpeed: 0
+  shotInterval: 0
+  minInterval: 0
+  maxInterval: 0
+  shotTimer: 0
+  bulletSpeed: 0
+  bulletPrefab: []
+  stateCount: 0
+  sustainability: 0
+  isState: 0
+  frequency: 0
+  moldFre: 1.5
+  corrFre: 2
+  burnFre: 2
+  actiFre: 1.5
+  setDuration: 0
+  isMold: 0
+  isCorrosion: 0
+  isBurning: 0
+  isActive: 0
+  mold: 0.8
+  corrosion: 1.5
+  burning: 0.9
+  active: 1
+  fire: 30
+  water: 20
+  wind: 15
+  explosion: 55
+  metal: 10
+  grass: 15
+  normal: 4
+  isFire: 0
+  isWater: 0
+  isWind: 0
+  isMetal: 0
+  isGrass: 0
+  test: 0
+  up: 1
 --- !u!1 &1457912190622302
 GameObject:
   m_ObjectHideFlags: 0

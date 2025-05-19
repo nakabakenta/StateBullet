@@ -1,14 +1,19 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBulletBase : MonoBehaviour
 {
-    public float firstAttack;    //初期攻撃力
-    public float currentAttack;  //現在の攻撃力
+    public int firstAttack;    //初期攻撃力
+    public int currentAttack;  //現在の攻撃力
 
     public float firstSpeed;    //初期弾速
     public float currentSpeed;  //現在の弾速
 
-    Vector3 bulletVec;
+    public string BulletMaster;     //弾の持ち主のタグ保存
+
+    //プレイヤースクリプトを取得
+    //マージ後、ここは書き換える
+    public TestPlayer testPlayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
@@ -26,10 +31,15 @@ public class EnemyBulletBase : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Enemy")
+        if (other.gameObject.tag == "Player")
+        {
+            testPlayer = other.gameObject.GetComponent<TestPlayer>();
+            testPlayer.currentHp -= currentAttack;
+
+        }
+        if (other.gameObject.tag != BulletMaster)
         {
             Destroy(gameObject);
         }
-        
     }
 }
