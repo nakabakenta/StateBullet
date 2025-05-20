@@ -750,8 +750,7 @@ MonoBehaviour:
   isGrass: 0
   isDamage: 0
   environment: {fileID: 0}
-  enemyBullet: {fileID: 0}
-  bulletName: GolemBullet
+  enemyBullet: {fileID: 8184577869890474979, guid: 4be07bad80dd649409013fcc29b60f28, type: 3}
   test: 0
   up: 1
 --- !u!1 &8667422108663880330

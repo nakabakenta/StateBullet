@@ -34,10 +34,10 @@ public class EnemyBase : MonoBehaviour
     public bool isBurning;   //燃焼状態かどうか
     public bool isActive;    //活性化状態かどうか
     //割合値
-    public float mold;       //カビ
-    public float corrosion;  //腐食
-    public float burning;    //燃焼
-    public float active;     //活性化
+    public float mold;      //カビ
+    public float corrosion; //腐食
+    public float burning;   //燃焼
+    public float active;    //活性化
     //ダメージ値　火　　水　　風　　　爆破　　　金属　　草　　通常　
     public float fire, water, wind, explosion, metal, grass, normal;
     //付与中の属性
@@ -117,7 +117,7 @@ public class EnemyBase : MonoBehaviour
     {
         //体力が0未満にならないようにし、
         //0以下になったら消去する
-        if (currentHP <= 0.0f)
+        if (currentHP <= 0.0f) 
         {
             currentHP = 0.0f;
 
@@ -162,10 +162,15 @@ public class EnemyBase : MonoBehaviour
     public void Environment()
     {
         //豪雨
+        
         //猛暑
+
         //暴風
+
         //高重力
+
         //低重力
+
         //豊穣
 
     }

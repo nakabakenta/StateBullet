@@ -188,7 +188,6 @@ MonoBehaviour:
   isGrass: 0
   isDamage: 0
   environment: {fileID: 0}
-  enemyBullet: {fileID: 0}
-  bulletName: FishBullet
+  enemyBullet: {fileID: -7438736135976319275, guid: 2c92d23231504a342a56b68ab0ec3a70, type: 3}
   test: 0
   up: 0

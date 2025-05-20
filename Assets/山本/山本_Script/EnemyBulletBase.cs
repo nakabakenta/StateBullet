@@ -19,12 +19,6 @@ public class EnemyBulletBase : MonoBehaviour
         currentAttack = firstAttack;  //UŒ‚—Í
     }
 
-    // Update is called once per frame
-    public void Update()
-    {
-        
-    }
-
     public void OnTriggerEnter(Collider other)
     {
         //ƒvƒŒƒCƒ„[‚É“–‚½‚Á‚½‚Æ‚«
