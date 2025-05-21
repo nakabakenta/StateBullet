@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4238390376515239635, guid: c6f8f8ed3d4420842ab50d9498193f51, type: 3}
+      propertyPath: safeHeight
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5386455940014192280, guid: c6f8f8ed3d4420842ab50d9498193f51, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -844,7 +848,7 @@ GameObject:
   - component: {fileID: 1938903553}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -938,7 +942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2164824844431476259, guid: 0fff68da888beb943a1eb62f9e39465f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2164824844431476259, guid: 0fff68da888beb943a1eb62f9e39465f, type: 3}
       propertyPath: m_LocalPosition.z
