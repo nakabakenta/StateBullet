@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6efdc149512ce894e8cf4fe829e7f7ca
+guid: 8d6d3a6d3f0854e4da4b17eeb8e5be80
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -97,11 +97,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI_Abnormal_01
+      name: UI_EnemyAttribute_01
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
+        y: 768
         width: 256
         height: 256
       alignment: 0
@@ -112,74 +112,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c872dc54dcb1c94e9ec3e5fc64ecfcd
-      internalID: -1951867973
+      spriteID: 8fcf29d8e1fa1b04db1849dcd76598eb
+      internalID: 288869162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Abnormal_03
+      name: UI_EnemyAttribute_02
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 868d55cb6304b9247a4b84c8b9ee9c0b
+      internalID: 880155094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_EnemyAttribute_03
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97105d19c0cb0a44e9188a069bb5ee28
+      internalID: 1894849846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_EnemyAttribute_04
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b754d38bc7416d48ac3ac5100468ef2
+      internalID: -458722508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_EnemyAttribute_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 512
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6ecc31f275007d489c375abe4d9b364
-      internalID: 1843796248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Abnormal_04
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5aeb2c57a8a9bed46a0c7fbf9e3aac77
-      internalID: 1531546332
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Abnormal_02
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 256
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 66e3dd075e7a3f642bf055af0e908b5d
-      internalID: -814924231
+      spriteID: d43eda1411cc07043a225b3003ffe4d5
+      internalID: -1192283953
       vertices: []
       indices: 
       edges: []
@@ -188,7 +210,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: dc2fe418531943e4999568f1647a7f9b
+    spriteID: 37117e1389e3bba4aad71298206dd01d
     internalID: 0
     vertices: []
     indices: 
@@ -198,10 +220,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI_Abnormal_01: -1951867973
-      UI_Abnormal_02: -814924231
-      UI_Abnormal_03: 1843796248
-      UI_Abnormal_04: 1531546332
+      UI_EnemyAttribute_0: -1192283953
+      UI_EnemyAttribute_01: 288869162
+      UI_EnemyAttribute_02: 880155094
+      UI_EnemyAttribute_03: 1894849846
+      UI_EnemyAttribute_04: -458722508
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
