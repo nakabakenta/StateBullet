@@ -8,6 +8,12 @@ public class CharacterBase : MonoBehaviour
     public float moveSpeed;     //移動速度
     public float originalSpeed; //基本移動速度
 
+    [Header("落下関連")]
+    public Vector3 pos;         //位置取得
+    public float maxHeight;     //着地する前の最大高度
+    public float safeHeight;    //落下してもダメージにならない高度
+    public bool onGround;       //着地判定
+
     [Header("状態異常関連")]
     public float stateCount;     //持続時間の計測用
     public float sustainability; //状態異常の持続時間
@@ -59,6 +65,9 @@ public class CharacterBase : MonoBehaviour
     [Header("スクリプト参照")]
     public Environment environment;     //環境
 
+    [Header("アニメーション")]
+    public Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
@@ -70,6 +79,8 @@ public class CharacterBase : MonoBehaviour
         sustainability = 30.0f;
         //環境情報を取得
         environment = GameObject.Find("VirtualEnvironment").GetComponent<Environment>();
+        //Animator情報を取得
+        animator = GetComponent<Animator>();
         //割合ダメージの初期化
         firstMold = mold;
         firstCorrosion = corrosion;
@@ -80,6 +91,12 @@ public class CharacterBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        //オブジェクトの座標取得
+        pos = transform.position;
+
+        //落下ダメージ
+        FallDamage();
+
         //環境状態による変化を管理
         Environment();
 
@@ -88,6 +105,24 @@ public class CharacterBase : MonoBehaviour
 
         //状態異常の管理
         StateManager();
+    }
+
+    //落下ダメージ
+    public void FallDamage()
+    {
+        //最高度を更新し続ける
+        if (pos.y > maxHeight)
+        {
+            maxHeight = pos.y;
+        }
+
+        //着地時に金属体じゃない＆一定の高度以上からの落下時にダメージ
+        if (!isMetal && maxHeight > safeHeight && onGround)
+        {
+            Debug.Log("痛っ！");
+            currentHP -= (maxHeight - safeHeight);
+            maxHeight = 0.0f;
+        }
     }
 
     //環境状態による変化を管理
@@ -100,18 +135,18 @@ public class CharacterBase : MonoBehaviour
             isBurning = false;
         }
         //猛暑(カビ無効＆消滅)
-        else if (environment.hot)
+        if (environment.hot)
         {
             isMold = false;
         }
         //暴風(燃焼の割合増加・移動速度低下)
-        else if (environment.storm)
+        if (environment.storm)
         {
             burning *= burnUp;
             moveSpeed *= downSpeed;
         }
         //高重力(金属体で移動不可)
-        else if (environment.high_gravity)
+        if (environment.high_gravity)
         {
             if (isMetal)
                 moveSpeed = 0.0f;
@@ -119,7 +154,7 @@ public class CharacterBase : MonoBehaviour
                 moveSpeed = originalSpeed;
         }
         //低重力(風を受けると一定時間浮遊・金属体で無効化)
-        else if (environment.low_gravity)
+        if (environment.low_gravity)
         {
             if (!isMetal)
             {
@@ -127,7 +162,7 @@ public class CharacterBase : MonoBehaviour
             }
         }
         //豊穣(活性化の割合増加・燃焼の持続延長)
-        else if (environment.abundant)
+        if (environment.abundant)
         {
             active *= actiUp;
             if (isBurning)
@@ -254,5 +289,21 @@ public class CharacterBase : MonoBehaviour
     {
         currentHP += maxHP * (active / 100);
         frequency = actiFre;
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="Ground")
+        {
+            onGround = true;
+        }
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            onGround = false;
+        }
     }
 }

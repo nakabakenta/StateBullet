@@ -126,9 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstAttack: 5
   currentAttack: 0
-  firstSpeed: 5
-  currentSpeed: 0
-  BulletMaster: IronEnemy
+  BulletMaster: Enemy
   testPlayer: {fileID: 0}
 --- !u!64 &8534726999831942844
 MeshCollider:

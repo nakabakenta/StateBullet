@@ -118,8 +118,18 @@ public class EnemyBase : CharacterBase
     {
         if(other.CompareTag("PBullet"))
         {
-            //ƒ_ƒ[ƒW‚ðŽó‚¯‚½
             isDamage = true;
+
+            if (currentHP > 0.0f) 
+            {
+                animator.SetTrigger("Hit");
+            }
+            else
+            {
+                animator.SetTrigger("Die");
+            }
+
+            isDamage = false;
         }
     }
 }
