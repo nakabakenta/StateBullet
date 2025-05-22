@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerBulletBase : BulletBase
 {
     [Header("使用中の属性弾")]
-    public bool[] useElement;  //使用属性弾
+    public int useElement;  //使用属性弾
     [Header("各属性弾の火力")]
     public int fire;
     public int water;
@@ -21,7 +21,6 @@ public class PlayerBulletBase : BulletBase
         EXPLOSION,
         METAL,
         GRASS,
-        NORMAL
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,8 +29,8 @@ public class PlayerBulletBase : BulletBase
         base.Start();
 
         //初期弾を通常弾に設定
-        currentAttack = (int)Element.NORMAL;
-        useElement[(int)Element.NORMAL] = true;
+        currentAttack = (int)Element.FIRE;
+        useElement = (int)Element.FIRE;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -41,38 +40,34 @@ public class PlayerBulletBase : BulletBase
         {
             //プレイヤーのスクリプトを取得して、HPを減らす
             character = other.gameObject.GetComponent<CharacterBase>();
-            if (useElement[(int)Element.FIRE])
+            if (useElement == (int)Element.FIRE)
             {
                 currentAttack = fire;
                 character.isFire = true;
             }
-            if (useElement[(int)Element.WATER])
+            else if (useElement == (int)Element.WATER)
             {
                 currentAttack = water;
                 character.isWater = true;
             }
-            if (useElement[(int)Element.WIND])
+            else if (useElement == (int)Element.WIND)
             {
                 currentAttack = wind;
                 character.isWind = true;
             }
-            if (useElement[(int)Element.EXPLOSION])
+            else if (useElement == (int)Element.EXPLOSION)
             {
                 currentAttack = explosion;
             }
-            if (useElement[(int)Element.METAL])
+            else if (useElement == (int)Element.METAL)
             {
                 currentAttack = metal;
                 character.isMetal = true;
             }
-            if (useElement[(int)Element.GRASS])
+            else if (useElement == (int)Element.GRASS)
             {
                 currentAttack = grass;
                 character.isGrass = true;
-            }
-            if (useElement[(int)Element.NORMAL])
-            {
-                currentAttack = normal;
             }
 
             character.currentHP -= currentAttack;

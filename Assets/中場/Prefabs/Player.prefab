@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5736592064629619162}
   - component: {fileID: 6862425737469119492}
   - component: {fileID: 7211803173122367400}
+  - component: {fileID: -9147607466778927097}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -101,6 +102,10 @@ MonoBehaviour:
   currentHP: 0
   moveSpeed: 5
   originalSpeed: 0
+  pos: {x: 0, y: 0, z: 0}
+  maxHeight: 0
+  safeHeight: 0
+  onGround: 0
   stateCount: 0
   sustainability: 0
   isState: 0
@@ -132,7 +137,33 @@ MonoBehaviour:
   longBurn: 0
   actiUp: 0
   environment: {fileID: 2825941046163781798, guid: 3e9d600032f5b0a4a8f66ca3a6284331, type: 3}
+  animator: {fileID: 0}
   cameraController: {fileID: 4347104587827226839}
+  playerBulletBase: {fileID: -9147607466778927097}
+--- !u!114 &-9147607466778927097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763875756622335582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a78a7f8bdd934c4786d1e03911f0551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttack: 0
+  BulletMaster: 
+  character: {fileID: 0}
+  environment: {fileID: 0}
+  useElement: 0
+  fire: 0
+  water: 0
+  wind: 0
+  explosion: 0
+  metal: 0
+  grass: 0
+  normal: 0
 --- !u!1 &6280506835764570343
 GameObject:
   m_ObjectHideFlags: 0

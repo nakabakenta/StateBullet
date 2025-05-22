@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerController : CharacterBase
 {
-    public CameraController cameraController;//カメラコントローラー
+    public CameraController cameraController;//"CameraController"
+    public PlayerBulletBase playerBulletBase;//"PlayerBulletBase"
 
     protected override void Start()
     {
@@ -20,5 +21,26 @@ public class PlayerController : CharacterBase
         //カメラの前後左右方向に移動
         Vector3 move = cameraController.transform.forward * vertical + cameraController.transform.right * horizontal;
         transform.position += move * moveSpeed * Time.deltaTime;
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        if (scroll > 0f)
+        {
+            if(playerBulletBase.useElement > 6)
+            {
+
+            }
+            else
+            {
+                playerBulletBase.useElement += 1;
+            }
+        }
+        else if (scroll < 0f)
+        {
+            Debug.Log("ホイールダウン！");
+            playerBulletBase.useElement -= 1;
+        }
+
+        Debug.Log(playerBulletBase.useElement);
     }
 }
