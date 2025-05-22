@@ -65,6 +65,9 @@ public class CharacterBase : MonoBehaviour
     [Header("スクリプト参照")]
     public Environment environment;     //環境
 
+    [Header("アニメーション")]
+    public Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
@@ -76,6 +79,8 @@ public class CharacterBase : MonoBehaviour
         sustainability = 30.0f;
         //環境情報を取得
         environment = GameObject.Find("VirtualEnvironment").GetComponent<Environment>();
+        //Animator情報を取得
+        animator = GetComponent<Animator>();
         //割合ダメージの初期化
         firstMold = mold;
         firstCorrosion = corrosion;

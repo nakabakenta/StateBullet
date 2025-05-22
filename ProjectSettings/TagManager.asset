@@ -8,6 +8,7 @@ TagManager:
   - PBullet
   - IronEnemy
   - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
